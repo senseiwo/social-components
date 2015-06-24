@@ -60,6 +60,7 @@ public abstract class HibernateDao {
             if (!transaction.wasCommitted() && !transaction.wasRolledBack()) {
                 transaction.commit();
             }
+            session.flush();
             session.close();
         }
     }
@@ -76,6 +77,7 @@ public abstract class HibernateDao {
             if (!transaction.wasCommitted() && !transaction.wasRolledBack()) {
                 transaction.commit();
             }
+            session.flush();
             session.close();
         }
         return result;
