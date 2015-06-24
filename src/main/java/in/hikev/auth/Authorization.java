@@ -16,4 +16,6 @@ public interface Authorization {
     ActionResult login(String name,String password);
 
     ActionResult signUp(User user);
+
+    int getTotalUserCount();
 }

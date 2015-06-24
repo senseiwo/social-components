@@ -48,3 +48,7 @@ target/classes/in/hikev/auth/Authorization.class
 .idea/workspace.xml
 *.xml
 .idea/vcs.xml
+*.class
+target/classes/in/hikev/commons/core/StatusCode.class
+*.class
+*.class

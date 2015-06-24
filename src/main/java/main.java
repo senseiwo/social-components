@@ -18,5 +18,7 @@ public class main {
         User user2 = auth.getUser("name","kevin");
 
         ActionResult result = auth.login("kevin","1231");
+
+        int count = auth.getTotalUserCount();
     }
 }
