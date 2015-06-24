@@ -2,8 +2,11 @@ package in.hikev.commons.hibernate.base;
 
 import in.hikev.commons.hibernate.HibernateSessionAction;
 import in.hikev.commons.hibernate.HibernateSessionFunc;
+import in.hikev.commons.hibernate.HibernateTransactionAction;
+import in.hikev.commons.hibernate.HibernateTransactionFunc;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,6 +16,36 @@ import java.util.Iterator;
  * Created by Administrator on 2015/6/22.
  */
 public abstract class HibernateDaoSupport extends HibernateDao {
+
+    protected <T> T save(final T entity) {
+        return (T) openSession(new HibernateTransactionFunc() {
+            public Object execute(Session session, Transaction transaction) {
+                return session.save(entity);
+            }
+        });
+    }
+
+    protected void update(final Object entity){
+        openSession(new HibernateTransactionAction() {
+            public void execute(Session session, Transaction transaction) {
+                session.update(entity);
+            }
+        });
+    }
+
+    protected void delete(final Object entity){
+        openSession(new HibernateTransactionAction() {
+            public void execute(Session session, Transaction transaction) {
+                session.delete(entity);
+            }
+        });
+    }
+
+    protected <T> void delete(final Class<T> c,final int id) {
+        T entity = get(c, id);
+        delete(entity);
+    }
+
     protected <T> T get(final Class<T> c,final String property, final Object value) {
         T result = (T)openSession(new HibernateSessionFunc() {
             public Object execute(Session session) {
