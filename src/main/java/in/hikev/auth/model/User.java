@@ -1,16 +1,11 @@
 package in.hikev.auth.model;
 
+import in.hikev.commons.hibernate.model.Entity;
+
 /**
  * Created by Administrator on 2015/6/22.
  */
-public class User {
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+public class User extends Entity {
 
     public String getName() {
         return name;
@@ -36,7 +31,6 @@ public class User {
         this.email = email;
     }
 
-    private int id;
     private String name;
     private String password;
     private String email;

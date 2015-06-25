@@ -4,6 +4,7 @@ import in.hikev.commons.hibernate.HibernateSessionAction;
 import in.hikev.commons.hibernate.HibernateSessionFunc;
 import in.hikev.commons.hibernate.HibernateTransactionAction;
 import in.hikev.commons.hibernate.HibernateTransactionFunc;
+import in.hikev.commons.hibernate.model.Entity;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -17,12 +18,15 @@ import java.util.Iterator;
  */
 public abstract class HibernateDaoSupport extends HibernateDao {
 
-    protected <T> T save(final T entity) {
-        return (T) openSession(new HibernateTransactionFunc() {
+    protected <T extends Entity> T save(final T entity) {
+        Object result = openSession(new HibernateTransactionFunc() {
             public Object execute(Session session, Transaction transaction) {
                 return session.save(entity);
             }
         });
+        int id = Integer.parseInt(result.toString());
+        entity.setId(id);
+        return entity;
     }
 
     protected void update(final Object entity){
@@ -82,6 +86,14 @@ public abstract class HibernateDaoSupport extends HibernateDao {
 
     protected int count(final String hql) {
         return count(hql, null);
+    }
+
+    protected boolean exist(final String hql) {
+        return count(hql) > 0;
+    }
+
+    protected boolean exist(final String hql,final Object ...args) {
+        return count(hql, args) > 0;
     }
 
     protected <T> T querySingle(final String hql){

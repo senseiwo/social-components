@@ -30,19 +30,23 @@ public class AuthorizationRepository extends HibernateDaoSupport implements Auth
         return result;
     }
 
-    public ActionResult signUp(final User user){
-        Object data = openSession(new HibernateTransactionFunc() {
-            public Object execute(Session session, Transaction transaction) {
-                ActionResult result = new ActionResult();
-                return null;
-            }
-        });
-
-        ActionResult result= new ActionResult(
-                data==null? StatusCode.LOGIN_FAILURE:StatusCode.OK,
-                data
-        );
-
+    public ActionResult signUp(final User user) {
+        ActionResult result = new ActionResult();
+        if (exist("from User u where u.name = ? ", user.getName())) {
+            result.setStatusCode(StatusCode.SIGNUP_FAILURE_USERNAME_EXIST);
+            return result;
+        }
+        if (exist("from User u where u.email = ? ", user.getEmail())) {
+            result.setStatusCode(StatusCode.SIGNUP_FAILURE_EMAIL_EXIST);
+            return result;
+        }
+        User u = save(user);
+        if (u.getId() > 0) {
+            result.setData(u);
+            result.setStatusCode(StatusCode.OK);
+            return result;
+        }
+        result.setStatusCode(StatusCode.INTERNAL_ERROR);
         return result;
     }
 
