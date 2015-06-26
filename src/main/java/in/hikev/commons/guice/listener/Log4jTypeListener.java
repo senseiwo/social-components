@@ -17,8 +17,7 @@ public class Log4jTypeListener implements TypeListener {
         Class<?> clazz = typeLiteral.getRawType();
         while (clazz != null) {
             for (Field field : clazz.getDeclaredFields()) {
-                if (field.getType() == Logger.class &&
-                        field.isAnnotationPresent(Log4jLogger.class)) {
+                if (field.getType() == Logger.class && field.isAnnotationPresent(Log4jLogger.class)) {
                     typeEncounter.register(new Log4jMemberInjector<I>(field));
                 }
             }
