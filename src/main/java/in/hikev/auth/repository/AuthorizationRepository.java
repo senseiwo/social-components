@@ -2,7 +2,7 @@ package in.hikev.auth.repository;
 
 import in.hikev.auth.Authorization;
 import in.hikev.auth.model.User;
-import in.hikev.commons.annotations.Log4jLogger;
+import in.hikev.commons.annotation.Log4jLogger;
 import in.hikev.commons.core.ActionResult;
 import in.hikev.commons.core.StatusCode;
 import in.hikev.commons.hibernate.base.HibernateDaoSupport;

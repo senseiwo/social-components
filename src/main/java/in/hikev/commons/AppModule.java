@@ -2,7 +2,7 @@ package in.hikev.commons;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.matcher.Matchers;
-import in.hikev.commons.guice.listeners.Log4jTypeListener;
+import in.hikev.commons.guice.listener.Log4jTypeListener;
 
 /**
  * Created by Administrator on 2015/6/26.
