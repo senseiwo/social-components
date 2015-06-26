@@ -2,14 +2,18 @@ package in.hikev.auth.repository;
 
 import in.hikev.auth.Authorization;
 import in.hikev.auth.model.User;
+import in.hikev.commons.annotations.Log4jLogger;
 import in.hikev.commons.core.ActionResult;
 import in.hikev.commons.core.StatusCode;
 import in.hikev.commons.hibernate.base.HibernateDaoSupport;
+import org.apache.log4j.Logger;
 
 /**
  * Created by Administrator on 2015/6/22.
  */
 public class AuthorizationRepository extends HibernateDaoSupport implements Authorization {
+
+    @Log4jLogger Logger logger;
 
     public User getUser(final int id) {
         return get(User.class, id);

@@ -3,6 +3,7 @@ import com.google.inject.Injector;
 import in.hikev.auth.Authorization;
 import in.hikev.auth.AuthorizationModule;
 import in.hikev.auth.model.User;
+import in.hikev.commons.AppModule;
 import in.hikev.commons.core.ActionResult;
 import in.hikev.commons.core.StatusCode;
 
@@ -11,7 +12,8 @@ import in.hikev.commons.core.StatusCode;
  */
 public class main {
     public static void main(String[] args){
-        Injector injector = Guice.createInjector(new AuthorizationModule());
+        Injector injector = Guice.createInjector(new AppModule(),
+                                                 new AuthorizationModule());
 
         Authorization auth = injector.getInstance(Authorization.class);
         User user = auth.getUser(1);
