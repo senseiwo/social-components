@@ -55,3 +55,4 @@ target/classes/in/hikev/commons/core/StatusCode.class
 *.class
 target/classes/in/hikev/auth/repository/AuthorizationRepository$1.class
 target/classes/log4j.properties
+*.log
