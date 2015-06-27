@@ -27,12 +27,16 @@ public class main {
         int count = auth.getTotalUserCount();
     }
 
+    static void settingTest(){
+
+    }
+
     static void StatusCodeTest(){
         String info = StatusCode.getStatusInfo(-2);
     }
 
     public static void main(String[] args){
         initialize();
-        authTest();
+        settingTest();
     }
 }

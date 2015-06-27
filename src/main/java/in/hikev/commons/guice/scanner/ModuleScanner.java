@@ -34,8 +34,7 @@ public class ModuleScanner {
 
     public Set<Module> scanForModules() {
         Set<Module> result = new HashSet<Module>();
-        Set<Class<?>> moduleClasses = reflections.getTypesAnnotatedWith(AutoloadModule.class);
-        for (Class<?> moduleClass : moduleClasses) {
+        for (Class<?> moduleClass : reflections.getTypesAnnotatedWith(AutoloadModule.class)) {
             Module instance = creator.createInstance((Class<? extends Module>) moduleClass);
             result.add(instance);
         }
