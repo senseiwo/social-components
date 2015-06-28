@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="in.hikev.file.model">
+    <class name="File" table="file" lazy="false">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="guid">
+            <column name="guid" length="50" not-null="true" />
+        </property>
+        <property name="objectModel">
+            <column name="object_model" not-null="true" />
+        </property>
+        <property name="objectId">
+            <column name="object_id" not-null="true" />
+        </property>
+        <property name="filePath">
+            <column name="file_path"/>
+        </property>
+        <property name="fileName">
+            <column name="file_name"/>
+        </property>
+        <property name="title">
+            <column name="title"/>
+        </property>
+        <property name="mimeType">
+            <column name="mime_type"/>
+        </property>
+        <property name="size" />
+        <property name="lastUpdateTime" type="java.sql.Timestamp">
+            <column name="last_update_time"/>
+        </property>
+    </class>
+</hibernate-mapping>

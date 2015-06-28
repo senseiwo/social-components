@@ -42,11 +42,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 .idea/vcs.xml
-*.xml
 target/classes/in/hikev/auth/Authorization.class
 *.class
 .idea/workspace.xml
-*.xml
 .idea/vcs.xml
 *.class
 target/classes/in/hikev/commons/core/StatusCode.class
