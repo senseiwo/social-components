@@ -7,9 +7,6 @@ import in.hikev.commons.core.StatusCode;
 import in.hikev.commons.guice.scanner.ModuleScanner;
 import in.hikev.setting.AppSetting;
 import in.hikev.setting.model.Setting;
-import org.apache.commons.beanutils.BeanUtils;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -45,9 +42,6 @@ public class main {
         //Setting result = settings.getSetting(1,"enable_cache");
 
         List<Setting> result = settings.getAllSettingsByType(1);
-        for(Setting s : result){
-            System.out.println(s.getValue());
-        }
     }
 
     static void StatusCodeTest(){
