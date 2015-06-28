@@ -16,11 +16,11 @@ public class File extends Entity {
         this.guid = guid;
     }
 
-    public int getObjectModel() {
+    public String getObjectModel() {
         return objectModel;
     }
 
-    public void setObjectModel(int objectModel) {
+    public void setObjectModel(String objectModel) {
         this.objectModel = objectModel;
     }
 
@@ -72,9 +72,18 @@ public class File extends Entity {
         this.lastUpdateTime = lastUpdateTime;
     }
 
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
     private String guid;
-    private int objectModel;
+    private String objectModel;
     private int objectId;
+    private String filePath;
     private String fileName;
     private String title;
     private String mimeType;
