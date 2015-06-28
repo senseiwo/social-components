@@ -5,9 +5,8 @@ import in.hikev.commons.hibernate.base.HibernateDaoSupport;
 import in.hikev.setting.AppSetting;
 import in.hikev.setting.model.Setting;
 import org.apache.log4j.Logger;
-
-import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/27.
@@ -16,7 +15,10 @@ public class AppSettingRepository extends HibernateDaoSupport implements AppSett
     @Log4jLogger
     Logger logger;
 
-    public Setting addSetting(@NotNull int type, @NotNull String key, @NotNull String value) {
+    public Setting addSetting(int type, String key, String value) throws IllegalArgumentException{
+        if(keyExists(type,key)){
+            throw new IllegalArgumentException("type-key already exist");
+        }
         Setting setting = new Setting();
 
         setting.setType(type);
@@ -25,5 +27,32 @@ public class AppSettingRepository extends HibernateDaoSupport implements AppSett
         setting.setLastUpdateTime(new Date());
 
         return save(setting);
+    }
+
+    public void updateSetting(int type, String key, String value) {
+        Setting setting = querySingle("from Setting s where s.type = ? and s.key = ?", type, key);
+        if (setting != null) {
+            setting.setValue(value);
+            update(setting);
+        }
+    }
+
+    public void delete(int type, String key) {
+        if (keyExists(type, key)) {
+            Setting setting = querySingle("from Setting s where s.type = ? and s.key = ?", type, key);
+            delete(setting);
+        }
+    }
+
+    private boolean keyExists(int type,String key) {
+        return exist("from Setting s where s.type = ? and s.key = ?", type, key);
+    }
+
+    public Setting getSetting(int type, String key){
+        return querySingle("from Setting s where s.type = ? and s.key = ?", type, key);
+    }
+
+    public List<Setting> getAllSettingsByType(int type) {
+        return query("from Setting s where s.type = ?", type);
     }
 }

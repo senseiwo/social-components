@@ -5,6 +5,7 @@ import in.hikev.commons.hibernate.HibernateSessionFunc;
 import in.hikev.commons.hibernate.HibernateTransactionAction;
 import in.hikev.commons.hibernate.HibernateTransactionFunc;
 import in.hikev.commons.hibernate.model.Entity;
+import org.apache.commons.beanutils.BeanUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -45,12 +46,12 @@ public abstract class HibernateDaoSupport extends HibernateDao {
         });
     }
 
-    protected <T> void delete(final Class<T> c,final int id) {
+    protected <T extends Entity> void delete(final Class<T> c,final int id) {
         T entity = get(c, id);
         delete(entity);
     }
 
-    protected <T> T get(final Class<T> c,final String property, final Object value) {
+    protected <T extends Entity> T get(final Class<T> c,final String property, final Object value) {
         T result = (T)openSession(new HibernateSessionFunc() {
             public Object execute(Session session) {
                 return session.createQuery(String.format("from %s where %s = ?", c.getSimpleName(), property))
@@ -61,7 +62,7 @@ public abstract class HibernateDaoSupport extends HibernateDao {
         return result;
     }
 
-    protected <T> T get(final Class<T> c,final Serializable value) {
+    protected <T extends Entity> T get(final Class<T> c,final Serializable value) {
         return (T)openSession(new HibernateSessionFunc() {
             public Object execute(Session session) {
                 return session.get(c, value);
@@ -96,11 +97,11 @@ public abstract class HibernateDaoSupport extends HibernateDao {
         return count(hql, args) > 0;
     }
 
-    protected <T> T querySingle(final String hql){
+    protected <T extends Entity> T querySingle(final String hql){
         return querySingle(hql,null);
     }
 
-    protected <T> T querySingle(final String hql,final Object ...args) {
+    protected <T extends Entity> T querySingle(final String hql,final Object ...args) {
         return (T) openSession(new HibernateSessionFunc() {
             public Object execute(Session session) {
                 Query query = session.createQuery(hql);
@@ -114,7 +115,7 @@ public abstract class HibernateDaoSupport extends HibernateDao {
         });
     }
 
-    protected <T> ArrayList<T> query(final String hql,final Object ...args) {
+    protected <T extends Entity> ArrayList<T> query(final String hql,final Object ...args) {
         final ArrayList<T> result = new ArrayList<T>();
         openSession(new HibernateSessionAction() {
             public void execute(Session session) {
@@ -126,6 +127,7 @@ public abstract class HibernateDaoSupport extends HibernateDao {
                 }
                 Iterator it = query.iterate();
                 while (it.hasNext()) {
+
                     result.add((T) it.next());
                 }
             }
@@ -133,15 +135,15 @@ public abstract class HibernateDaoSupport extends HibernateDao {
         return result;
     }
 
-    protected <T> ArrayList<T> query(final String hql) {
+    protected <T extends Entity> ArrayList<T> query(final String hql) {
         return query(hql, null);
     }
 
-    protected <T> ArrayList<T> query(final int startIndex,final int maxResult,final String hql) {
+    protected <T extends Entity> ArrayList<T> query(final int startIndex,final int maxResult,final String hql) {
         return query(startIndex, maxResult, hql, null);
     }
 
-    protected <T> ArrayList<T> query(final int startIndex,final int maxResult,final String hql,final Object ...args) {
+    protected <T extends Entity> ArrayList<T> query(final int startIndex,final int maxResult,final String hql,final Object ...args) {
         final ArrayList<T> result = new ArrayList<T>();
         openSession(new HibernateSessionAction() {
             public void execute(Session session) {

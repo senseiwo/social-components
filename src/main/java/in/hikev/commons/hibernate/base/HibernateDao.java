@@ -54,13 +54,13 @@ public abstract class HibernateDao {
         Transaction transaction = session.beginTransaction();
         try {
             action.execute(session, transaction);
+            session.flush();
         } catch (Exception ex) {
             transaction.rollback();
         } finally {
             if (!transaction.wasCommitted() && !transaction.wasRolledBack()) {
                 transaction.commit();
             }
-            session.flush();
             session.close();
         }
     }
@@ -71,13 +71,13 @@ public abstract class HibernateDao {
         Object result = null;
         try {
             result = action.execute(session, transaction);
+            session.flush();
         } catch (Exception ex) {
             transaction.rollback();
         } finally {
             if (!transaction.wasCommitted() && !transaction.wasRolledBack()) {
                 transaction.commit();
             }
-            session.flush();
             session.close();
         }
         return result;

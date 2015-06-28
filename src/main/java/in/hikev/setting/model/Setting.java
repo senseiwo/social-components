@@ -2,6 +2,8 @@ package in.hikev.setting.model;
 
 import in.hikev.commons.hibernate.model.Entity;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 /**

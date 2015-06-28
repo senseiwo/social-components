@@ -5,6 +5,12 @@ import in.hikev.auth.model.User;
 import in.hikev.commons.core.ActionResult;
 import in.hikev.commons.core.StatusCode;
 import in.hikev.commons.guice.scanner.ModuleScanner;
+import in.hikev.setting.AppSetting;
+import in.hikev.setting.model.Setting;
+import org.apache.commons.beanutils.BeanUtils;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/22.
@@ -27,8 +33,21 @@ public class main {
         int count = auth.getTotalUserCount();
     }
 
-    static void settingTest(){
+    static void settingTest() {
+        AppSetting settings = injector.getInstance(AppSetting.class);
 
+        //settings.addSetting(1, "enable_cache", "true");
+
+        //settings.delete(1,"enable_cache");
+
+        //settings.updateSetting(1,"enable_cache","false");
+
+        //Setting result = settings.getSetting(1,"enable_cache");
+
+        List<Setting> result = settings.getAllSettingsByType(1);
+        for(Setting s : result){
+            System.out.println(s.getValue());
+        }
     }
 
     static void StatusCodeTest(){
