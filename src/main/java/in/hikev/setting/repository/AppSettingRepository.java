@@ -1,6 +1,8 @@
 package in.hikev.setting.repository;
 
 import in.hikev.commons.annotation.Log4jLogger;
+import in.hikev.commons.core.ActionResult;
+import in.hikev.commons.core.StatusCode;
 import in.hikev.commons.hibernate.base.HibernateDaoSupport;
 import in.hikev.setting.AppSetting;
 import in.hikev.setting.model.Setting;
@@ -15,9 +17,11 @@ public class AppSettingRepository extends HibernateDaoSupport implements AppSett
     @Log4jLogger
     Logger logger;
 
-    public Setting addSetting(int type, String key, String value) throws IllegalArgumentException{
+    public ActionResult addSetting(int type, String key, String value){
+        ActionResult result = new ActionResult();
         if(keyExists(type,key)){
-            throw new IllegalArgumentException("type-key already exist");
+            result.setStatusCode(StatusCode.SETTING_KEY_EXIST);
+            return result;
         }
         Setting setting = new Setting();
 
@@ -25,8 +29,11 @@ public class AppSettingRepository extends HibernateDaoSupport implements AppSett
         setting.setKey(key);
         setting.setValue(value);
         setting.setLastUpdateTime(new Date());
+        setting = save(setting);
 
-        return save(setting);
+        result.setData(setting);
+        result.setStatusCode(StatusCode.OK);
+        return result;
     }
 
     public void updateSetting(int type, String key, String value) {

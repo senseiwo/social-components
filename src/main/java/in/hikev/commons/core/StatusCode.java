@@ -14,6 +14,8 @@ public class StatusCode {
     public static int SIGNUP_FAILURE_USERNAME_EXIST = -2;
     public static int SIGNUP_FAILURE_EMAIL_EXIST = -3;
 
+    public static int SETTING_KEY_EXIST = -4;
+
     public static String getStatusInfo(int code) {
         String info = null;
         for (Field field : StatusCode.class.getFields()) {

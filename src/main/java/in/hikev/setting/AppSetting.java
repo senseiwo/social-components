@@ -1,5 +1,6 @@
 package in.hikev.setting;
 
+import in.hikev.commons.core.ActionResult;
 import in.hikev.setting.model.Setting;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface AppSetting {
 
-    Setting addSetting(int type, String key, String value);
+    ActionResult addSetting(int type, String key, String value);
 
     void updateSetting(int type, String key, String value);
 
