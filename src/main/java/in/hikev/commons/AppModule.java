@@ -3,6 +3,7 @@ package in.hikev.commons;
 import com.google.inject.AbstractModule;
 import com.google.inject.matcher.Matchers;
 import in.hikev.commons.annotation.AutoloadModule;
+import in.hikev.commons.guice.listener.HibernateValidatorListener;
 import in.hikev.commons.guice.listener.Log4jTypeListener;
 
 /**
@@ -13,5 +14,6 @@ public class AppModule extends AbstractModule {
     @Override
     protected void configure() {
         bindListener(Matchers.any(), new Log4jTypeListener());
+        bindListener(Matchers.any(), new HibernateValidatorListener());
     }
 }

@@ -2,6 +2,8 @@ package in.hikev.auth.model;
 
 import in.hikev.commons.hibernate.model.Entity;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by Administrator on 2015/6/22.
  */
@@ -31,7 +33,12 @@ public class User extends Entity {
         this.email = email;
     }
 
+    @NotNull
     private String name;
+
+    @NotNull
     private String password;
+
+    @NotNull
     private String email;
 }

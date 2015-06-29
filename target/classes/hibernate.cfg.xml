@@ -33,6 +33,7 @@
 
         <mapping resource="in/hikev/auth/model/User.hbm.xml"/>
         <mapping resource="in/hikev/setting/model/Setting.hbm.xml"/>
+        <mapping resource="in/hikev/file/model/File.hbm.xml"/>
 
     </session-factory>
 

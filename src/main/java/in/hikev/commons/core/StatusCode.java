@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
  */
 public class StatusCode {
     public static int OK = 1;
+    public static int DATA_ISVALID = 2;
     public static int INTERNAL_ERROR = 0;
 
     public static int LOGIN_FAILURE = -1;
@@ -15,6 +16,8 @@ public class StatusCode {
     public static int SIGNUP_FAILURE_EMAIL_EXIST = -3;
 
     public static int SETTING_KEY_EXIST = -4;
+
+    public static int VALIDATION_ERROR = -5;
 
     public static String getStatusInfo(int code) {
         String info = null;

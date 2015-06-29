@@ -1,24 +1,31 @@
 package in.hikev.setting.repository;
 
+import in.hikev.commons.annotation.HibernateValidator;
 import in.hikev.commons.annotation.Log4jLogger;
 import in.hikev.commons.core.ActionResult;
+import in.hikev.commons.core.AppRepository;
 import in.hikev.commons.core.StatusCode;
-import in.hikev.commons.hibernate.base.HibernateDaoSupport;
+import in.hikev.file.model.File;
 import in.hikev.setting.AppSetting;
 import in.hikev.setting.model.Setting;
 import org.apache.log4j.Logger;
+
+import javax.validation.Validator;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Administrator on 2015/6/27.
  */
-public class AppSettingRepository extends HibernateDaoSupport implements AppSetting {
+public class AppSettingRepository extends AppRepository implements AppSetting {
     @Log4jLogger
     Logger logger;
 
-    public ActionResult addSetting(int type, String key, String value){
-        ActionResult result = new ActionResult();
+    @HibernateValidator
+    Validator validator;
+
+    public ActionResult<Setting> addSetting(int type, String key, String value){
+        ActionResult<Setting> result = new ActionResult<Setting>();
         if(keyExists(type,key)){
             result.setStatusCode(StatusCode.SETTING_KEY_EXIST);
             return result;
@@ -29,8 +36,12 @@ public class AppSettingRepository extends HibernateDaoSupport implements AppSett
         setting.setKey(key);
         setting.setValue(value);
         setting.setLastUpdateTime(new Date());
-        setting = save(setting);
 
+        result = extractValidationErrors(validator.validate(setting));
+        if(result.getStatusCode() == StatusCode.VALIDATION_ERROR){
+            return result;
+        }
+        setting = save(setting);
         result.setData(setting);
         result.setStatusCode(StatusCode.OK);
         return result;
@@ -38,7 +49,7 @@ public class AppSettingRepository extends HibernateDaoSupport implements AppSett
 
     public void updateSetting(int type, String key, String value) {
         Setting setting = querySingle("from Setting s where s.type = ? and s.key = ?", type, key);
-        if (setting != null) {
+        if (setting != null && value != null) {
             setting.setValue(value);
             update(setting);
         }

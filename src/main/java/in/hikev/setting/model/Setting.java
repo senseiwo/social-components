@@ -4,6 +4,7 @@ import in.hikev.commons.hibernate.model.Entity;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -44,8 +45,13 @@ public class Setting extends Entity{
         this.lastUpdateTime = lastUpdateTime;
     }
 
+    @NotNull
     private int type;
+
+    @NotNull
     private String key;
+
+    @NotNull
     private String value;
     private Date lastUpdateTime;
 }

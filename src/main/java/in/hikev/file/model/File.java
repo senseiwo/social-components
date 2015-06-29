@@ -2,6 +2,7 @@ package in.hikev.file.model;
 
 import in.hikev.commons.hibernate.model.Entity;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -81,12 +82,21 @@ public class File extends Entity {
     }
 
     private String guid;
+
+    @NotNull
     private String objectModel;
+
+    @NotNull
     private int objectId;
+
+    @NotNull
     private String filePath;
+
+    @NotNull
+    private Date lastUpdateTime;
+
     private String fileName;
     private String title;
     private String mimeType;
     private String size;
-    private Date lastUpdateTime;
 }
