@@ -23,15 +23,48 @@ public class AppFileRepository extends AppRepository implements AppFile {
     @HibernateValidator
     Validator validator;
 
-    public ActionResult addFile(String model,int modelId,String filePath) {
+    public ActionResult<File> addFile(String model,int modelId,String filePath) {
+        return addFile(model,modelId,filePath,null,null,null,null);
+    }
+
+    public ActionResult<File> addFile(String model,int modelId,String filePath,String fileName){
+        return addFile(model,modelId,filePath,fileName,null,null,null);
+    }
+
+    public ActionResult<File> addFile(String model,int modelId,String filePath,String fileName,String title){
+        return addFile(model,modelId,filePath,fileName,title,null,null);
+    }
+
+    public ActionResult<File> addFile(String model,int modelId,String filePath,String fileName,String title,String mimeType){
+        return addFile(model,modelId,filePath,fileName,title,mimeType,null);
+    }
+
+    public ActionResult<File> addFile(File file) {
+        return addFile(file.getObjectModel(),
+                file.getObjectId(),
+                file.getFilePath(),
+                file.getFileName(),
+                file.getTitle(),
+                file.getMimeType(),
+                file.getSize());
+    }
+
+    public ActionResult<File> addFile(String model,
+                                      int modelId,
+                                      String filePath,
+                                      String fileName,
+                                      String title,
+                                      String mimeType,
+                                      String size){
         File file = new File();
+
         file.setObjectId(modelId);
         file.setObjectModel(model);
         file.setFilePath(filePath);
-        return addFile(file);
-    }
-
-    public ActionResult addFile(File file){
+        file.setFileName(fileName);
+        file.setTitle(title);
+        file.setMimeType(mimeType);
+        file.setSize(size);
         file.setGuid(UUID.randomUUID().toString());
         file.setLastUpdateTime(new Date());
 

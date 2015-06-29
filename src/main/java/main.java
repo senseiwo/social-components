@@ -30,6 +30,7 @@ public class main {
         User user2 = auth.getUser("name","kevin");
         ActionResult result = auth.login("kevin", "1231");
         int count = auth.getTotalUserCount();
+        ActionResult<User> result2 = auth.signUp(new User());
     }
 
     static void settingTest() {
@@ -57,6 +58,6 @@ public class main {
 
     public static void main(String[] args){
         initialize();
-        fileTest();
+        authTest();
     }
 }

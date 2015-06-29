@@ -5,7 +5,6 @@ import in.hikev.commons.annotation.Log4jLogger;
 import in.hikev.commons.core.ActionResult;
 import in.hikev.commons.core.AppRepository;
 import in.hikev.commons.core.StatusCode;
-import in.hikev.file.model.File;
 import in.hikev.setting.AppSetting;
 import in.hikev.setting.model.Setting;
 import org.apache.log4j.Logger;
