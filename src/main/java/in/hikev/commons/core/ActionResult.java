@@ -2,6 +2,7 @@ package in.hikev.commons.core;
 
 import javax.validation.ConstraintViolation;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -22,6 +23,7 @@ public class ActionResult<T> {
 
     public ActionResult(){
         messages = new ArrayList<String>();
+        violations = new HashSet<ConstraintViolation<T>>();
     }
 
     public int getStatusCode() {
