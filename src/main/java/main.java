@@ -48,8 +48,18 @@ public class main {
     }
 
     static void fileTest(){
-        AppFile file = injector.getInstance(AppFile.class);
-        ActionResult<File> result = file.addFile(new File());
+        AppFile appFile = injector.getInstance(AppFile.class);
+
+        //File file = new File();
+        //file.setObjectModel("Profile");
+        //file.setObjectId(1);
+        //file.setFilePath("f:/avatar.png");
+
+        //ActionResult<File> result = appFile.addFile(file);
+
+        File file =  appFile.getFile("35323278-4476-4294-a1ac-ff04d72598d2");
+        List<File> fiels = appFile.getFiles("Profile",1);
+        appFile.updateFileTitle(1,"abc");
     }
 
     static void StatusCodeTest(){
@@ -58,6 +68,6 @@ public class main {
 
     public static void main(String[] args){
         initialize();
-        authTest();
+        fileTest();
     }
 }

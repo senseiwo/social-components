@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import javax.validation.Validator;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -22,6 +23,30 @@ public class AppFileRepository extends AppRepository implements AppFile {
 
     @HibernateValidator
     Validator validator;
+
+    public File getFile(int id){
+        return get(File.class,id);
+    }
+
+    public File getFile(String guid){
+        return get(File.class,"guid",guid);
+    }
+
+    public List<File> getFiles(String model,int id) {
+        return query("from File f where f.objectModel=? and f.objectId=?", model, id);
+    }
+
+    public void updateFileTitle(int id,String title){
+        File file = getFile(id);
+        if(file!=null){
+            file.setTitle(title);
+            update(file);
+        }
+    }
+
+    public List<File> getFiles(String model,int id,int startIndex,int maxSize) {
+        return query(startIndex, maxSize, "from File f where f.objectModel=? and f.objectId=?", model, id);
+    }
 
     public ActionResult<File> addFile(String model,int modelId,String filePath) {
         return addFile(model,modelId,filePath,null,null,null,null);
