@@ -44,6 +44,22 @@ public class AppFileRepository extends AppRepository implements AppFile {
         }
     }
 
+    public ActionResult<File> deleteFile(int id) {
+        File file = getFile(id);
+        return deleteFile(file);
+    }
+
+    public ActionResult<File> deleteFile(String guid) {
+        File file = getFile(guid);
+        return deleteFile(file);
+    }
+
+    private ActionResult<File> deleteFile(File file){
+        ActionResult<File> result = new ActionResult<File>();
+        //todo add logic here
+        return result;
+    }
+
     public List<File> getFiles(String model,int id,int startIndex,int maxSize) {
         return query(startIndex, maxSize, "from File f where f.objectModel=? and f.objectId=?", model, id);
     }

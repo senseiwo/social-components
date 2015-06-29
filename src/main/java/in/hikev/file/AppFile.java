@@ -19,6 +19,10 @@ public interface AppFile {
 
     void updateFileTitle(int id,String title);
 
+    ActionResult<File> deleteFile(int id);
+
+    ActionResult<File> deleteFile(String guid);
+
     ActionResult<File> addFile(File file);
 
     ActionResult<File> addFile(String model,int modelId,String filePath);
