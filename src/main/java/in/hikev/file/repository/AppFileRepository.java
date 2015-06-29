@@ -40,22 +40,10 @@ public class AppFileRepository extends AppRepository implements AppFile {
     }
 
     public ActionResult<File> addFile(File file) {
-        return addFile(file.getObjectModel(),
-                file.getObjectId(),
-                file.getFilePath(),
-                file.getFileName(),
-                file.getTitle(),
-                file.getMimeType(),
-                file.getSize());
+        return addFile(file.getObjectModel(), file.getObjectId(), file.getFilePath(), file.getFileName(), file.getTitle(), file.getMimeType(), file.getSize());
     }
 
-    public ActionResult<File> addFile(String model,
-                                      int modelId,
-                                      String filePath,
-                                      String fileName,
-                                      String title,
-                                      String mimeType,
-                                      String size){
+    public ActionResult<File> addFile(String model, int modelId, String filePath, String fileName, String title, String mimeType, String size){
         File file = new File();
 
         file.setObjectId(modelId);
