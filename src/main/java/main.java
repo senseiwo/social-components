@@ -7,6 +7,8 @@ import in.hikev.commons.core.StatusCode;
 import in.hikev.commons.guice.scanner.ModuleScanner;
 import in.hikev.file.AppFile;
 import in.hikev.file.model.File;
+import in.hikev.like.AppLike;
+import in.hikev.like.model.Like;
 import in.hikev.setting.AppSetting;
 import in.hikev.setting.model.Setting;
 import java.util.List;
@@ -64,12 +66,19 @@ public class main {
         //ActionResult<File> result = appFile.deleteFile(4);
     }
 
+    static void likeTest(){
+        AppLike like = injector.getInstance(AppLike.class);
+
+        ActionResult<Like> result = like.like(1, "User", 2);
+        ActionResult<Like> result2 =like.unlike(1,"User",2);
+    }
+
     static void StatusCodeTest(){
         String info = StatusCode.getStatusInfo(-2);
     }
 
     public static void main(String[] args){
         initialize();
-        fileTest();
+        likeTest();
     }
 }

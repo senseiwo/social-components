@@ -12,6 +12,7 @@ import in.hikev.like.model.Like;
 import org.apache.log4j.Logger;
 
 import javax.validation.Validator;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2015/6/30.
@@ -33,6 +34,7 @@ public class AppLikeRepository extends AppRepository implements AppLike {
             like.setTargetUserId(userId);
             like.setObjectModel(model);
             like.setObjectId(objectId);
+            like.setLastUpdateTime(new Date());
 
             result = extractValidationErrors(validator.validate(like));
             if (result.getStatusCode() == StatusCode.VALIDATION_ERROR) {
