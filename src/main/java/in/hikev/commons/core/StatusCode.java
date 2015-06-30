@@ -20,6 +20,8 @@ public class StatusCode {
     public static int VALIDATION_ERROR = -5;
 
     public static int DELETE_FILE_FAILED=-6;
+    public static int LIKE_FAILED = -7;
+    public static int UNLIKE_FAILED = -8;
 
     public static String getStatusInfo(int code) {
         String info = null;

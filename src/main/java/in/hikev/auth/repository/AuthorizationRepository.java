@@ -66,4 +66,8 @@ public class AuthorizationRepository extends AppRepository implements Authorizat
     public int getTotalUserCount() {
         return count("from User");
     }
+
+    public boolean userExist(int id) {
+        return count("from User u where u.id = ?", id) > 0;
+    }
 }

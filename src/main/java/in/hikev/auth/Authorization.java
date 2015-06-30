@@ -18,4 +18,6 @@ public interface Authorization {
     ActionResult signUp(User user);
 
     int getTotalUserCount();
+
+    boolean userExist(int id);
 }
