@@ -66,6 +66,10 @@ public class AppLikeRepository extends AppRepository implements AppLike {
         return result;
     }
 
+    public boolean hasLiked(int userId, String model, int objectId) {
+        return likedAlready(userId,model,objectId);
+    }
+
     private boolean likedAlready(int userId, String model, int objectId) {
         String hql = "from Like l where l.targetUserId = ? and l.objectModel = ? and l.objectId = ?";
         return count(hql, userId, model, objectId) > 0;

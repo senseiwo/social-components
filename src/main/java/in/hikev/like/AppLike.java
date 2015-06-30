@@ -10,4 +10,6 @@ public interface AppLike {
     ActionResult<Like> like(int userId,String model,int objectId);
 
     ActionResult<Like> unlike(int userId,String model,int objectId);
+
+    boolean hasLiked(int userId,String model,int objectId);
 }
