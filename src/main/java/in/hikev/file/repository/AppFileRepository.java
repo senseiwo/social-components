@@ -6,6 +6,7 @@ import in.hikev.commons.core.ActionResult;
 import in.hikev.commons.core.AppRepository;
 import in.hikev.commons.core.StatusCode;
 import in.hikev.file.AppFile;
+import in.hikev.commons.io.FileIOUtils;
 import in.hikev.file.model.File;
 import org.apache.log4j.Logger;
 
@@ -56,7 +57,15 @@ public class AppFileRepository extends AppRepository implements AppFile {
 
     private ActionResult<File> deleteFile(File file){
         ActionResult<File> result = new ActionResult<File>();
-        //todo add logic here
+        delete(file);
+        if(file!=null&&!exist(File.class,file.getId())) {
+            FileIOUtils.deleteFile(file.getFilePath());
+            result.setStatusCode(StatusCode.OK);
+            result.setData(file);
+            return result;
+        }
+        result.setStatusCode(StatusCode.DELETE_FILE_FAILED);
+        result.setData(file);
         return result;
     }
 

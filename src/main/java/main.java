@@ -50,16 +50,18 @@ public class main {
     static void fileTest(){
         AppFile appFile = injector.getInstance(AppFile.class);
 
-        //File file = new File();
-        //file.setObjectModel("Profile");
-        //file.setObjectId(1);
-        //file.setFilePath("f:/avatar.png");
+        File file = new File();
+        file.setObjectModel("Profile");
+        file.setObjectId(1);
+        file.setFilePath("f:/avatar.png");
 
         //ActionResult<File> result = appFile.addFile(file);
 
-        File file =  appFile.getFile("35323278-4476-4294-a1ac-ff04d72598d2");
-        List<File> fiels = appFile.getFiles("Profile",1);
-        appFile.updateFileTitle(1,"abc");
+        //File file =  appFile.getFile("35323278-4476-4294-a1ac-ff04d72598d2");
+        //List<File> fiels = appFile.getFiles("Profile",1);
+        //appFile.updateFileTitle(1,"abc");
+
+        //ActionResult<File> result = appFile.deleteFile(4);
     }
 
     static void StatusCodeTest(){

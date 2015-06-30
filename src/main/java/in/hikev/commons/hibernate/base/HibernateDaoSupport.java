@@ -97,6 +97,10 @@ public abstract class HibernateDaoSupport extends HibernateDao {
         return count(hql, args) > 0;
     }
 
+    protected <T> boolean exist(final Class<T> c,Object id) {
+        return count(String.format("from %s o where o.id = ?", c.getSimpleName()), id) > 0;
+    }
+
     protected <T extends Entity> T querySingle(final String hql){
         return querySingle(hql,null);
     }

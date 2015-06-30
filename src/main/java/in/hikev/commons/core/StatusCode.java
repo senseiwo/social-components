@@ -19,6 +19,8 @@ public class StatusCode {
 
     public static int VALIDATION_ERROR = -5;
 
+    public static int DELETE_FILE_FAILED=-6;
+
     public static String getStatusInfo(int code) {
         String info = null;
         for (Field field : StatusCode.class.getFields()) {
