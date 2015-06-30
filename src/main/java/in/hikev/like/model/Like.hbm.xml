@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="in.hikev.like.model">
+    <class name="Like" table="like" lazy="false">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="targetUserId" type="java.lang.Integer">
+            <column name="target_user_id" not-null="true" />
+        </property>
+        <property name="objectModel" type="java.lang.String">
+            <column name="object_model" length="200" not-null="true" />
+        </property>
+        <property name="objectId" type="java.lang.Integer">
+            <column name="object_id" not-null="true" />
+        </property>
+        <property name="lastUpdateTime" type="java.sql.Timestamp">
+            <column name="last_update_time"/>
+        </property>
+    </class>
+</hibernate-mapping>
