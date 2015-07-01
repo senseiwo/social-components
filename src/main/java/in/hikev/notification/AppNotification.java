@@ -18,5 +18,7 @@ public interface AppNotification {
 
     void clearNotifications(int userId);
 
-    List<Notification> getAllNotifications(int startIndex,int maxResult,int userId);
+    List<Notification> getAllNotifications(int startIndex, int maxResult, int userId);
+
+    List<Notification> getAllNotifications(int startIndex, int maxResult, int userId, boolean isSeen);
 }

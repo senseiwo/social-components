@@ -78,6 +78,12 @@ public class AppNotificationRepository extends AppRepository implements AppNotif
         return query(startIndex, maxResult, "from Notification noti where noti.userId = ?", userId);
     }
 
+    public List<Notification> getAllNotifications(int startIndex,int maxResult,int userId,boolean isSeen) {
+        return query(startIndex, maxResult, "from Notification noti where noti.userId = ? and noti.seen = ?",
+                userId,
+                isSeen ? 1 : 0);
+    }
+
     private boolean isNotified(int userId,String sourceModel,int sourceId,String targetModel,int targetId) {
         String hql = new StringBuilder()
                 .append("from Notification noti where ")
