@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="in.hikev.notification.model">
+    <class name="Notification" table="notification" lazy="false">
+        <id name="id">
+            <generator class="native"/>
+        </id>
+        <property name="userId" type="java.lang.Integer">
+            <column name="user_id" not-null="true" />
+        </property>
+        <property name="seen" type="java.lang.Short">
+            <column name="seen" not-null="true" />
+        </property>
+        <property name="sourceObjectModel" type="java.lang.String">
+            <column name="source_object_model" length="200" not-null="true" />
+        </property>
+        <property name="sourceObjectId" type="java.lang.Integer">
+            <column name="source_object_id" not-null="true" />
+        </property>
+        <property name="targetObjectModel" type="java.lang.String">
+            <column name="target_object_model" length="200" not-null="true" />
+        </property>
+        <property name="targetObjectId" type="java.lang.Integer">
+            <column name="target_object_id" not-null="true" />
+        </property>
+        <property name="lastUpdateTime" type="java.sql.Timestamp">
+            <column name="last_update_time" length="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
