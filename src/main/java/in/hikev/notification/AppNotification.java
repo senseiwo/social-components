@@ -13,4 +13,6 @@ public interface AppNotification {
     void removeNotification(int id);
 
     void setSeen(int id);
+
+    void clearNotifications(int userId);
 }

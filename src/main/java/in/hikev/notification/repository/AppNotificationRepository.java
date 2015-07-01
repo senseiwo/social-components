@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import javax.validation.Validator;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/7/1.
@@ -65,6 +66,16 @@ public class AppNotificationRepository extends AppRepository implements AppNotif
             noti.setSeen(1);
             update(noti);
         }
+    }
+
+    public void clearNotifications(int userId) {
+        if(auth.userExist(userId)){
+            delete("delete Notification n where n.userId = ?", userId);
+        }
+    }
+
+    public List<Notification> getAllNotifications(int startIndex,int maxResult,int userId) {
+        return query(startIndex, maxResult, "from Notification noti where noti.userId = ?", userId);
     }
 
     private boolean isNotified(int userId,String sourceModel,int sourceId,String targetModel,int targetId) {

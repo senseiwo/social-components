@@ -46,6 +46,24 @@ public abstract class HibernateDaoSupport extends HibernateDao {
         });
     }
 
+    protected void delete(final String hql,final Object ...args){
+        openSession(new HibernateTransactionAction() {
+            public void execute(Session session, Transaction transaction) {
+                Query query = session.createQuery(hql);
+                if (args != null && args.length > 0) {
+                    for (int i = 0; i < args.length; i++) {
+                        query.setParameter(i, args[i]);
+                    }
+                }
+                query.executeUpdate();
+            }
+        });
+    }
+
+    protected void delete(final String hql) {
+        delete(hql, null);
+    }
+
     protected <T extends Entity> void delete(final Class<T> c,final int id) {
         T entity = get(c, id);
         delete(entity);
