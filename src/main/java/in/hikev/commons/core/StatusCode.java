@@ -22,6 +22,7 @@ public class StatusCode {
     public static int DELETE_FILE_FAILED=-6;
     public static int LIKE_FAILED = -7;
     public static int UNLIKE_FAILED = -8;
+    public static int NOTIFY_USER_FAILED = -9;
 
     public static String getStatusInfo(int code) {
         String info = null;
