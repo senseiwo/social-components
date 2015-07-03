@@ -70,4 +70,8 @@ public class AuthorizationRepository extends AppRepository implements Authorizat
     public boolean userExist(int id) {
         return count("from User u where u.id = ?", id) > 0;
     }
+
+    public boolean userExist(String name) {
+        return count("from User u where u.name = ?", name) > 0;
+    }
 }

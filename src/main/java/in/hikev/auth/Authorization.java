@@ -20,4 +20,6 @@ public interface Authorization {
     int getTotalUserCount();
 
     boolean userExist(int id);
+
+    boolean userExist(String name);
 }

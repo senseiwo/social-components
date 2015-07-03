@@ -9,6 +9,16 @@ import javax.validation.constraints.NotNull;
  */
 public class User extends Entity {
 
+    public User(String name, String password, String email) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+    }
+
+    public User(){
+
+    }
+
     public String getName() {
         return name;
     }
